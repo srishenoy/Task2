@@ -4,7 +4,10 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -23,9 +26,13 @@ public class OfficeChair {
 	public static WebDriver driver ;
 
   @Test
-  public void Chair() throws InterruptedException {
+  public void Chair() throws InterruptedException, IOException {
 	  JavascriptExecutor js = (JavascriptExecutor)driver;
-	  
+//	  Properties prop=new Properties();
+//	  FileInputStream fs=new FileInputStream("/amazonSearch/data.properties");
+//	  prop.load(fs);
+//	  String searchItem=prop.getProperty("searchitem");
+//		System.out.println(searchItem);
 //		System.setProperty("webdriver.chrome.verboseLogging", "true");
 		Thread.sleep(10000);
 		WebElement InputBox =driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
@@ -115,7 +122,7 @@ public class OfficeChair {
   @BeforeTest
   public void beforeTest() throws InterruptedException{
 	  ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-fullscreen");
+		options.addArguments("--headless","--start-fullscreen");
 		driver = new ChromeDriver(options); 
 		driver.get("https://www.amazon.com");
   }
