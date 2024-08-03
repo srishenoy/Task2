@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-08-02T18:29:21 IST" name="Default suite" finished-at="2024-08-02T18:31:10 IST" duration-ms="109838">
+    <groups>
+    </groups>
+    <test started-at="2024-08-02T18:29:21 IST" name="Default test" finished-at="2024-08-02T18:31:10 IST" duration-ms="109838">
+      <class name="amazonSearch.OfficeChair">
+        <test-method is-config="true" signature="beforeTest()[pri:0, instance:amazonSearch.OfficeChair@e7edb54]" started-at="2024-08-02T18:29:21 IST" name="beforeTest" finished-at="2024-08-02T18:29:26 IST" duration-ms="5814" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:amazonSearch.OfficeChair@e7edb54]" started-at="2024-08-02T18:29:26 IST" name="beforeClass" finished-at="2024-08-02T18:29:26 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="Chair()[pri:0, instance:amazonSearch.OfficeChair@e7edb54]" started-at="2024-08-02T18:29:26 IST" name="Chair" finished-at="2024-08-02T18:31:10 IST" duration-ms="103486" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Chair -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:amazonSearch.OfficeChair@e7edb54]" started-at="2024-08-02T18:31:10 IST" name="afterMethod" finished-at="2024-08-02T18:31:10 IST" duration-ms="484" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:amazonSearch.OfficeChair@e7edb54]" started-at="2024-08-02T18:31:10 IST" name="afterTest" finished-at="2024-08-02T18:31:10 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- amazonSearch.OfficeChair -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
