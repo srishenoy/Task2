@@ -3,9 +3,12 @@ package amazonSearch;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +20,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -28,28 +33,28 @@ public class OfficeChair {
   @Test
   public void Chair() throws InterruptedException, IOException {
 	  JavascriptExecutor js = (JavascriptExecutor)driver;
-//	  Properties prop=new Properties();
-//	  FileInputStream fs=new FileInputStream("/amazonSearch/data.properties");
-//	  prop.load(fs);
-//	  String searchItem=prop.getProperty("searchitem");
-//		System.out.println(searchItem);
-//		System.setProperty("webdriver.chrome.verboseLogging", "true");
+	  Properties prop=new Properties();
+	  FileInputStream fs=new FileInputStream("src/main/resources/data.properties");
+	  prop.load(fs);
+	  String searchItem=prop.getProperty("searchitem");
+		System.out.println(searchItem);
 		Thread.sleep(10000);
-		WebElement InputBox =driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
-		InputBox.click();
+		WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
 		Thread.sleep(1000);
-		InputBox.sendKeys("Office Chairs");
-		WebElement search= driver.findElement(By.xpath("//span[@id='nav-search-submit-text']"));
-		search.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
-	
-		List<WebElement> Chairs = driver.findElements(By.cssSelector(".s-main-slot .s-result-item"));
+		searchBox.sendKeys(searchItem);
+		searchBox.submit();
+		Thread.sleep(7000);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".a-declarative")));
+        List<WebElement> Products = driver.findElements(By.cssSelector(".a-declarative"));
+        System.out.println("Number of products found: " + Products.size());
+        Thread.sleep(4000);
         WebElement highestRatedProduct = null;
         double highestRating = 0;
-        for (WebElement OfficeChairs : Chairs) {
+        for (WebElement SearchChairs : Products) {
             try {
-                WebElement ratingStar = OfficeChairs.findElement(By.cssSelector("span.a-icon-alt"));
-                WebElement reviewCount = OfficeChairs.findElement(By.cssSelector("span.a-size-base"));
+                WebElement ratingStar = SearchChairs.findElement(By.cssSelector("span.a-icon-alt"));
+                WebElement reviewCount = SearchChairs.findElement(By.cssSelector("span.a-size-base"));
 
                 String ratingText = ratingStar.getAttribute("innerHTML");
                 double rating = Double.parseDouble(ratingText.split(" ")[0]);
@@ -61,11 +66,11 @@ public class OfficeChair {
 
                 if (combinedRating > highestRating) {
                     highestRating = combinedRating;
-                    highestRatedProduct = OfficeChairs;
+                    highestRatedProduct = SearchChairs;
                 }
             } catch (Exception e) {
-                System.out.println("ITEM MISSING");
-                driver.quit();
+                System.out.println("ITEM MISSING " +e);
+                continue;
             }
         }
 
@@ -120,10 +125,23 @@ public class OfficeChair {
   }
 
   @BeforeTest
-  public void beforeTest() throws InterruptedException{
-	  ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless","--start-fullscreen");
-		driver = new ChromeDriver(options); 
+  public void beforeTest() throws InterruptedException, IOException{
+//	  
+	  
+	  Properties props=new Properties();
+	  FileInputStream fs=new FileInputStream("src/main/resources/data.properties");
+	  props.load(fs);
+	  String browser = props.getProperty("browser");
+	  if ("chrome".equalsIgnoreCase(browser)) {
+		  ChromeOptions options = new ChromeOptions();
+			options.addArguments("--start-fullscreen");
+			driver = new ChromeDriver(options); 
+      } 
+	  else
+	  {
+		  System.out.println("Browser not available =" +browser);
+		  driver.quit();
+	  }
 		driver.get("https://www.amazon.com");
   }
 
