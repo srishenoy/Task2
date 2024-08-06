@@ -1,2 +1,2 @@
-Download chromedriver ver 127. Supported & set the chromedriver path up in .zshrc / .bash_profile.
-Other than chrome no other browser is been added.
+Download the Chromedriver version supporting chrome on the device. Set the Chromedriver path up in .zshrc / .bash_profile.
+Other than Chrome no other browser is been added.
