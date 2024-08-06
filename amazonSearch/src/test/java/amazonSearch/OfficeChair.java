@@ -134,7 +134,7 @@ public class OfficeChair {
 	  String browser = props.getProperty("browser");
 	  if ("chrome".equalsIgnoreCase(browser)) {
 		  ChromeOptions options = new ChromeOptions();
-			options.addArguments("--start-fullscreen");
+			options.addArguments("--start-fullscreen","--headless");
 			driver = new ChromeDriver(options); 
       } 
 	  else
